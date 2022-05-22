@@ -10,9 +10,20 @@ const connect = async () => {
 		await mongoose.connect(process.env.MONGO);
 		console.log('MONGO connect');
 	} catch (error) {
-		throw errow;
+		throw error;
 	}
 };
+
+mongoose.connection.on('disconnected', () => {
+	console.log('mongodb disconnected');
+});
+mongoose.connection.on('connected', () => {
+	console.log('mongodb connected');
+});
+
+app.get('/', (req, res) => {
+	res.send('hellooooooooo');
+});
 
 app.listen(5000, () => {
 	connect();
