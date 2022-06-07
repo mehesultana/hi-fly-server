@@ -3,7 +3,7 @@ import express from 'express';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-	res.send('hellooooooooo this auth');
+	res.send('Hello this is auth!');
 });
 
 export default router;

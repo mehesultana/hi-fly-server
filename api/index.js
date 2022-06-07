@@ -7,19 +7,21 @@ import hotelsRoute from './routes/hotels.js';
 import roomsRoute from './routes/rooms.js';
 
 const app = express();
+
 dotenv.config();
 
 const connect = async () => {
 	try {
-		await mongoose.connect(process.env.MONGO);
-		console.log('MONGO connect');
+		await mongoose.connect(process.env.MONGODB);
+		console.log('MongoDB connect successfully');
 	} catch (error) {
+		console.log('MongoDB can not connected', error);
 		throw error;
 	}
 };
 
 mongoose.connection.on('disconnected', () => {
-	console.log('mongodb disconnected');
+	console.log('MongoDB disconnected');
 });
 
 // mongoose.connection.on('connected', () => {
@@ -30,14 +32,15 @@ mongoose.connection.on('disconnected', () => {
 // 	res.send('hellooooooooo');
 // });
 
-//middlewares
+//	middlewares
+app.use(express.json());
 
 app.use('/api/auth', authRoute);
-app.use('/api/users', authRoute);
-app.use('/api/hotels', authRoute);
-app.use('/api/rooms', authRoute);
+app.use('/api/users', usersRoute);
+app.use('/api/hotels', hotelsRoute);
+app.use('/api/rooms', roomsRoute);
 
 app.listen(5000, () => {
 	connect();
-	console.log('connect!!');
+	console.log('PORT connected successfully!');
 });
