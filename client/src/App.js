@@ -6,9 +6,9 @@ import { Hotel } from './pages/Hotel/Hotel';
 const App = () => {
 	return (
 		<Routes>
-			<Route path="/" element={<Home />}></Route>
-			<Route path="/hotels" element={<List />}></Route>
-			<Route path="/hotels/:id" element={<Hotel />}></Route>
+			<Route path='/' element={<Home />}></Route>
+			<Route path='/hotels' element={<List />}></Route>
+			<Route path='/hotels/:id' element={<Hotel />}></Route>
 		</Routes>
 	);
 };
