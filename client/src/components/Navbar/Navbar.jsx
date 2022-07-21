@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 export const Navbar = () => {
-	//const { loading, error, dispatch } = useContext(AuthContext);
+	const { user } = useContext(AuthContext);
 
 	return (
 		<div className='navbar'>
@@ -11,10 +12,14 @@ export const Navbar = () => {
 				<Link to='/' style={{ color: 'inherit', textDecoration: 'none' }}>
 					<span className='logo'>Hi Fly</span>
 				</Link>
-				<div className='navItems'>
-					<button className='navButton'>Register</button>
-					<button className='navButton'>Login</button>
-				</div>
+				{user ? (
+					user.username
+				) : (
+					<div className='navItems'>
+						<button className='navButton'>Register</button>
+						<button className='navButton'>Login</button>
+					</div>
+				)}
 			</div>
 		</div>
 	);
